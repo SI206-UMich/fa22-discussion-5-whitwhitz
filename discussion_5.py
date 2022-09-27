@@ -4,7 +4,7 @@ import unittest
 def count_a(sentence):
 	total = 0
 	for i in range(len(sentence) - 1):
-		if i == 'a':
+		if sentence[i] == 'a':
 			total += 1
 	return total
 
@@ -38,7 +38,7 @@ class Warehouse:
 
 	# Adds an item to the warehouse	
 	def add_item(self, item):
-		pass
+		self.items.append(item)
 
 	# Returns the item in the warehouse with the most stock		
 	def get_max_stock(self):
@@ -61,14 +61,22 @@ class TestAllMethods(unittest.TestCase):
 		self.item4 = Item("Fanta", 2, 60)
 		self.item5 = Item("CocaCola", 3, 40)
 
+		self.item_list = [self.item1, self.item2, self.item3]
+
+		self.w1 = Warehouse(self.item_list)
+
+
 	## Check to see whether count_a works
 	def test_count_a(self):
-		pass
+		self.assertEqual(count_a("Hello world"), 0, "no a's")
+		self.assertEqual(count_a("anacondas eat apples"), 5, "five a's")
+		self.assertEqual(count_a("ahhhhhh"), 1, "one a")
 
 
 	## Check to see whether you can add an item to the warehouse
 	def test_add_item(self):
-		pass
+		self.w1.add_item(self.item4)
+		self.assertEqual(self.w1.items[3], "Fanta", "added the fanta")
 
 
 	## Check to see whether warehouse correctly returns the item with the most stock
